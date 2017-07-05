@@ -1,5 +1,6 @@
 package org.mangobutter.configuration;
 
+import org.mangobutter.controller.RestAuthenticationEntryPoint;
 import org.mangobutter.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,9 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
+	private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+	
+	@Autowired
     private AccessDeniedHandler accessDeniedHandler;
 	
 	@Autowired
@@ -26,6 +30,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
+        		.exceptionHandling()
+        		.authenticationEntryPoint(restAuthenticationEntryPoint)
+        		.and()
                 .authorizeRequests()
 					.antMatchers("/", "/login/**", "/api/login/**", "/public/**").permitAll()
 					.anyRequest().authenticated()
