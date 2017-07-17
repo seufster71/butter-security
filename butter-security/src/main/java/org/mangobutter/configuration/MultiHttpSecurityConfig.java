@@ -44,6 +44,8 @@ public class MultiHttpSecurityConfig {
 			http.csrf().disable()
             .authorizeRequests()
 				.antMatchers("/", "/login/**", "/libs/**", "/public/**").permitAll()
+				.antMatchers("/test/**").hasAuthority("PRIVATE")
+				.antMatchers("/admin/**").hasAuthority("ADMIN")
 				.anyRequest().authenticated()
             .and()
             .formLogin()

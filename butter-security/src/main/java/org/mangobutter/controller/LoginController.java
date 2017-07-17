@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,7 +34,11 @@ public class LoginController {
 			params.put("password", request.getParams().get("password"));
 			
 			 List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-			 authorities.add(new SimpleGrantedAuthority("PRIVATE"));
+			 if ( "admin".equals(request.getParams().get("username")) ) {
+				 authorities.add(new SimpleGrantedAuthority("ADMIN"));
+			 } else {
+				 authorities.add(new SimpleGrantedAuthority("PRIVATE"));
+			 }
 			Authentication auth = new UsernamePasswordAuthenticationToken(request.getParams().get("username"),request.getParams().get("password"), authorities);
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			response.getParams().put("Status", "Login successful");
