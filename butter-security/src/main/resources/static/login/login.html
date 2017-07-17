@@ -2,10 +2,44 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<script type="text/javascript" src="/libs/jquery-3.2.1.min.js"></script> 
+<script>
+function login() {
+	var name = document.getElementById("username").value;
+	var pass = document.getElementById("password").value;
+	var params = JSON.stringify({params: {username: name, password: pass}});
+	jQuery.ajax({
+			url: "/api/login/service",
+			dataType: 'json',
+		  	type: "POST",
+		  	contentType: 'application/json',
+		  	data: params,
+		  	processData: false,
+		    success: function(data, textStatus, jqXHR){
+		    	mySuccess(data, textStatus, jqXHR);
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		    	
+		    }
+	});
+}
+
+function mySuccess(data, textStatus, jqXHR) {
+	  alert("Data: " + data + "\nStatus: " + status);
+}
+
+function goSecure() {
+	window.location.replace("/test/index.html")
+}
+</script>
 <title>Insert title here</title>
 </head>
 <body>
+Username: <input id="username" type="text">
+Password: <input id="password" type="password">
+<button onclick="login()"> Submit</button>
 
-Login test in security
+<button onclick="goSecure()"> Go secure</button>
+
 </body>
 </html>

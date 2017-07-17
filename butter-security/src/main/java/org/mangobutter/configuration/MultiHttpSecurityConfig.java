@@ -43,7 +43,7 @@ public class MultiHttpSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.csrf().disable()
             .authorizeRequests()
-				.antMatchers("/", "/login/**", "/public/**").permitAll()
+				.antMatchers("/", "/login/**", "/libs/**", "/public/**").permitAll()
 				.anyRequest().authenticated()
             .and()
             .formLogin()
