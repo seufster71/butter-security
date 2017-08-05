@@ -40,6 +40,7 @@ public class LoginController {
 				 authorities.add(new SimpleGrantedAuthority("PRIVATE"));
 			 }
 			Authentication auth = new UsernamePasswordAuthenticationToken(request.getParams().get("username"),request.getParams().get("password"), authorities);
+			
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			response.getParams().put("Status", "Login successful");
 		} else {
