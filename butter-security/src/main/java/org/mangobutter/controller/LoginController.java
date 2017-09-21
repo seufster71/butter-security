@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.utils.Request;
-import com.example.utils.Response;
+import org.testo.core.utils.Request;
+import org.testo.core.utils.Response;
 
 @RestController
 @RequestMapping("api/login/")
